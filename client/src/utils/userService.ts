@@ -2,7 +2,7 @@ import tokenService from "./tokenService";
 import type { User } from "../shared.types";
 import axios from "axios";
 
-const BASE_URL = "/api/auth/";
+const BASE_URL = "http://localhost:3000/api/users/";
 
 type LoginCredentials = {
   email: string;
