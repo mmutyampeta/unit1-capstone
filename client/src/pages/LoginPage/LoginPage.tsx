@@ -48,22 +48,27 @@ export default function LoginPage({ handleSignUpOrLogin }: LoginPageProps) {
   return (
     <div className="login-page">
       <div className="login-form-container">
+        <Link className="login-brand" to="/">spoonful</Link>
         <h2 className="login-header">Login</h2>
         <form autoComplete="off" onSubmit={handleSubmit} className="login-form">
           <div className="login-segment">
+            <label htmlFor="email">Email</label>
             <input
+              id="email"
               type="email"
               name="email"
-              placeholder="email"
+              placeholder="you@example.com"
               value={state.email}
               onChange={handleChange}
               required
               className="login-input"
             />
+            <label htmlFor="password">Password</label>
             <input
+              id="password"
               name="password"
               type="password"
-              placeholder="password"
+              placeholder="Enter your password"
               value={state.password}
               onChange={handleChange}
               required
