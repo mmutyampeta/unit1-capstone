@@ -19,12 +19,15 @@ function App() {
         path="/"
         element={
           <main className="landing-page">
-            <p className="landing-kicker">Spoonful</p>
-            <h1>Recipes worth sharing.</h1>
-            <p>Browse recipes from home cooks and save inspiration for your next meal.</p>
-            <Link className="landing-login" to="/login">
-              Log in
-            </Link>
+            <header className="landing-header">
+              <Link className="landing-brand" to="/">spoonful</Link>
+              <Link className="landing-login" to="/login">Log in</Link>
+            </header>
+            <section className="landing-content">
+              <p className="landing-kicker">A place for home cooking</p>
+              <h1>Recipes worth sharing.</h1>
+              <p>Browse recipes from home cooks and save inspiration for your next meal.</p>
+            </section>
           </main>
         }
       />
