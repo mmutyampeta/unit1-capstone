@@ -33,15 +33,11 @@ function App() {
       />
       <Route
         path="/login"
-        element={
-          user ? <Navigate to="/" replace /> : <LoginPage handleSignUpOrLogin={handleSignUpOrLogin} />
-        }
+        element={<LoginPage handleSignUpOrLogin={handleSignUpOrLogin} />}
       />
       <Route
         path="/signup"
-        element={
-          user ? <Navigate to="/" replace /> : <SignUpPage handleSignUpOrLogin={handleSignUpOrLogin} />
-        }
+        element={<SignUpPage handleSignUpOrLogin={handleSignUpOrLogin} />}
       />
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>

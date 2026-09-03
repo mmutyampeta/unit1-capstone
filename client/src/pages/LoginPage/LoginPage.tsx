@@ -24,17 +24,15 @@ export default function LoginPage({ handleSignUpOrLogin }: LoginPageProps) {
 
   async function handleSubmit(e: FormEvent) {
     e.preventDefault();
+    setError("");
 
     try {
-      // We always pass in an OBJECT as the data we want to send to the server
-      await userService.login(state); // making the http request to the server
+      await userService.login(state);
 
-      navigate("/login");
-      handleSignUpOrLogin(); // this comes from app.js as a prop, which it gets the token from localstorage and stores the decoded
-      // token in the app.js state
-    } catch (err) {
-      console.log(err);
-      setError("check terminal and console");
+      handleSignUpOrLogin();
+      navigate("/");
+    } catch (err: unknown) {
+      setError(err instanceof Error ? err.message : "Unable to log in.");
     }
   }
 
