@@ -2,10 +2,8 @@ import { useState } from "react";
 import type { ChangeEvent, FormEvent } from "react";
 import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
 import "./SignupPage.css";
-
-// this hook allows us to navigate programatically
-import { useNavigate } from "react-router-dom";
-// import userService from "../../utils/userService";
+import { Link, useNavigate } from "react-router-dom";
+import userService from "../../utils/userService";
 
 type SignupPageProps = {
   handleSignUpOrLogin: () => void;
@@ -32,60 +30,74 @@ export default function SignUpPage({ handleSignUpOrLogin }: SignupPageProps) {
 
   async function handleSubmit(e: FormEvent) {
     e.preventDefault();
+    setError("");
 
-    try {
-      // await userService.signup(state); // userService is imported at top of file
-      handleSignUpOrLogin(); // this is destructred in the props
-      // and it grabs the token from localstorage and sets the
-      // new user in state!
-
-      // Change the view to the home page!
-      navigate("/"); // navigate acceps a path defined by a route!
-    } catch (err: any) {
-      console.log(err, " <- this comes from tht throw in utils/signup");
-      setError(err.message);
+    if (state.password !== state.passwordConf) {
+      setError("Passwords do not match.");
+      return;
     }
 
-    // ===========================================
+    try {
+      await userService.signup({
+        email: state.email,
+        password: state.password,
+      });
+      handleSignUpOrLogin();
+      navigate("/");
+    } catch (err: unknown) {
+      setError(err instanceof Error ? err.message : "Unable to create account.");
+    }
   }
 
   return (
     <div className="signup-page">
       <div className="signup-form-container">
-        <h2 className="signup-header">Sign Up</h2>
+        <Link className="signup-brand" to="/">
+          <span className="signup-brand-mark" aria-hidden="true">⌇</span>
+          spoonful
+        </Link>
+        <h2 className="signup-header">Create an Account</h2>
         <form
           autoComplete="off"
           onSubmit={handleSubmit}
           className="signup-form"
         >
           <div className="signup-segment">
+            <label htmlFor="username">Username</label>
             <input
+              id="username"
               name="username"
-              placeholder="username"
+              placeholder="Username"
               value={state.username}
               onChange={handleChange}
               required
               className="signup-input"
             />
+            <label htmlFor="email">Email</label>
             <input
+              id="email"
               type="email"
               name="email"
-              placeholder="email"
+              placeholder="Email"
               value={state.email}
               onChange={handleChange}
               required
               className="signup-input"
             />
+            <label htmlFor="signup-password">Password</label>
             <input
+              id="signup-password"
               name="password"
               type="password"
-              placeholder="password"
+              placeholder="Password"
               value={state.password}
               onChange={handleChange}
               required
               className="signup-input"
             />
+            <label htmlFor="password-confirmation">Confirm password</label>
             <input
+              id="password-confirmation"
               name="passwordConf"
               type="password"
               placeholder="Confirm Password"
@@ -96,8 +108,9 @@ export default function SignUpPage({ handleSignUpOrLogin }: SignupPageProps) {
             />
           </div>
           <button type="submit" className="signup-btn">
-            Signup
+            Create Account
           </button>
+          <Link className="signup-cancel" to="/login">Cancel</Link>
           {error ? <ErrorMessage message={error} /> : null}
         </form>
       </div>

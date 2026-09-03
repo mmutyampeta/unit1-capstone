@@ -5,7 +5,7 @@ import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
 
 import { Link, useNavigate } from "react-router-dom";
 
-// import userService from "../../utils/userService";
+import userService from "../../utils/userService";
 
 type LoginPageProps = {
   handleSignUpOrLogin: () => void;
@@ -27,9 +27,9 @@ export default function LoginPage({ handleSignUpOrLogin }: LoginPageProps) {
 
     try {
       // We always pass in an OBJECT as the data we want to send to the server
-      // await userService.login(state); // making the http request to the server
+      await userService.login(state); // making the http request to the server
 
-      navigate("/");
+      navigate("/login");
       handleSignUpOrLogin(); // this comes from app.js as a prop, which it gets the token from localstorage and stores the decoded
       // token in the app.js state
     } catch (err) {

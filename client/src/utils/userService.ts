@@ -10,10 +10,8 @@ type LoginCredentials = {
 };
 
 type SignupData = {
-  username: string;
   email: string;
   password: string;
-  passwordConf: string;
 };
 
 async function signup(user: SignupData): Promise<void> {
@@ -37,6 +35,7 @@ function logout(): void {
 async function login(creds: LoginCredentials): Promise<void> {
   try {
     const res = await axios.post(BASE_URL + "login", creds);
+    console.log("User Authentication Successful");
     tokenService.setToken(res.data.token);
   } catch (err) {
     console.log("err", "this is error", err);
