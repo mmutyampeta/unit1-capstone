@@ -48,8 +48,14 @@ export default function LoginPage({ handleSignUpOrLogin }: LoginPageProps) {
   return (
     <div className="login-page">
       <div className="login-form-container">
-        <Link className="login-brand" to="/">spoonful</Link>
-        <h2 className="login-header">Login</h2>
+        <Link className="login-brand" to="/">
+          <span className="login-brand-mark" aria-hidden="true">⌇</span>
+          spoonful
+        </Link>
+        <div className="login-intro">
+          <h2 className="login-header">Welcome Back!</h2>
+          <p>Log in to your account to continue</p>
+        </div>
         <form autoComplete="off" onSubmit={handleSubmit} className="login-form">
           <div className="login-segment">
             <label htmlFor="email">Email</label>
@@ -57,7 +63,7 @@ export default function LoginPage({ handleSignUpOrLogin }: LoginPageProps) {
               id="email"
               type="email"
               name="email"
-              placeholder="you@example.com"
+              placeholder="Email"
               value={state.email}
               onChange={handleChange}
               required
@@ -68,19 +74,19 @@ export default function LoginPage({ handleSignUpOrLogin }: LoginPageProps) {
               id="password"
               name="password"
               type="password"
-              placeholder="Enter your password"
+              placeholder="Password"
               value={state.password}
               onChange={handleChange}
               required
               className="login-input"
             />
+            <a className="forgot-password" href="#password">Forgot Password?</a>
             <button type="submit" className="login-btn">
               Login
             </button>
+            <Link className="create-account" to="/signup">Create an Account</Link>
           </div>
-          <div className="login-message">
-            New to Us? <Link to="/signup">Sign up</Link>
-          </div>
+          <Link className="explore-recipes" to="/">Explore Recipes without Logging In</Link>
           {error ? <ErrorMessage message={error} /> : null}
         </form>
       </div>
