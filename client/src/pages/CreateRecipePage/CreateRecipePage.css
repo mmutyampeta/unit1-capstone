@@ -1,0 +1,199 @@
+.create-recipe-page {
+	min-height: 100vh;
+}
+
+.create-recipe-header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	min-height: 56px;
+	padding: 0 1.25rem;
+	border-bottom: 1px solid #b0b0b0;
+}
+
+.create-recipe-brand {
+	display: flex;
+	align-items: center;
+	gap: 0.2rem;
+	padding: 0;
+	border: 0;
+	background: transparent;
+	color: #1b1b1b;
+	cursor: pointer;
+	font: inherit;
+	font-size: 0.875rem;
+	font-weight: 700;
+}
+
+.create-recipe-brand-mark {
+	font-size: 1.35rem;
+	line-height: 0.7;
+	transform: rotate(180deg);
+}
+
+.create-recipe-back,
+.recipe-text-button {
+	color: #57852f;
+	font: inherit;
+	font-size: 0.875rem;
+	font-weight: 700;
+}
+
+.create-recipe-content {
+	max-width: 360px;
+	margin: 0 auto;
+	padding: 1.25rem 1.5rem 3rem;
+}
+
+.create-recipe-content h1 {
+	margin: 0 0 1.5rem;
+	color: #1b1b1b;
+	font-size: 1.5rem;
+	font-weight: 600;
+	text-align: center;
+}
+
+.recipe-form {
+	display: grid;
+	gap: 0.25rem;
+}
+
+.recipe-form > label:not(.recipe-image-upload) {
+	margin-top: 0.45rem;
+	color: #3d3d3d;
+	font-size: 0.7rem;
+	font-weight: 600;
+}
+
+.recipe-form input,
+.recipe-form textarea {
+	box-sizing: border-box;
+	width: 100%;
+	padding: 0.55rem 0.65rem;
+	border: 1px solid #707070;
+	border-radius: 4px;
+	background: #ffffff;
+	color: #1b1b1b;
+	font: inherit;
+	font-size: 0.7rem;
+	resize: vertical;
+}
+
+.recipe-form input:focus,
+.recipe-form textarea:focus {
+	outline: 2px solid #c1e0a6;
+	outline-offset: 1px;
+	border-color: #57852f;
+}
+
+.recipe-form-actions {
+	display: grid;
+	gap: 0.35rem;
+	margin-top: 1.5rem;
+}
+
+.recipe-save-button,
+.recipe-cancel-button {
+	box-sizing: border-box;
+	width: 100%;
+	padding: 0.6rem 1rem;
+	border-radius: 4px;
+	font: inherit;
+	font-size: 0.7rem;
+	font-weight: 700;
+	text-align: center;
+}
+
+.recipe-save-button {
+	border: 1px solid #57852f;
+	background: #6ba539;
+	color: #ffffff;
+	cursor: pointer;
+}
+
+.recipe-save-button:hover {
+	background: #57852f;
+}
+
+.recipe-cancel-button {
+	border: 1px solid #6ba539;
+	color: #57852f;
+}
+
+.unsaved-changes-backdrop {
+	position: fixed;
+	inset: 0;
+	z-index: 10;
+	display: grid;
+	place-items: center;
+	background: rgb(27 27 27 / 26%);
+	padding: 1rem;
+}
+
+.unsaved-changes-modal {
+	box-sizing: border-box;
+	width: min(100%, 212px);
+	padding: 1.6rem 0.55rem 0.75rem;
+	border: 2px solid #707070;
+	border-radius: 8px;
+	background: #fbeabf;
+	box-shadow: 0 8px 22px rgb(27 27 27 / 28%);
+	text-align: center;
+}
+
+.unsaved-changes-modal h2 {
+	margin: 0;
+	color: #1b1b1b;
+	font-size: 0.875rem;
+	font-weight: 700;
+}
+
+.unsaved-changes-modal p {
+	margin: 1rem 0 1.1rem;
+	color: #1b1b1b;
+	font-size: 0.75rem;
+	line-height: 1.35;
+}
+
+.unsaved-changes-save,
+.unsaved-changes-discard,
+.unsaved-changes-cancel {
+	box-sizing: border-box;
+	width: 100%;
+	padding: 0.6rem 0.4rem;
+	border-radius: 8px;
+	cursor: pointer;
+	font: inherit;
+	font-size: 0.75rem;
+	font-weight: 700;
+}
+
+.unsaved-changes-save {
+	border: 1px solid #57852f;
+	background: #6ba539;
+	color: #ffffff;
+}
+
+.unsaved-changes-discard {
+	margin-top: 0.4rem;
+	border: 1px solid #6ba539;
+	background: transparent;
+	color: #6ba539;
+}
+
+.unsaved-changes-cancel {
+	margin-top: 0.35rem;
+	border: 0;
+	background: transparent;
+	color: #6ba539;
+}
+
+@media (max-width: 560px) {
+	.create-recipe-content {
+		padding: 1.25rem 1rem 3rem;
+	}
+
+	.create-recipe-content h1 {
+		font-size: 1.4rem;
+	}
+}

@@ -5,7 +5,8 @@ import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
 
 import { Link, useNavigate } from "react-router-dom";
 
-// import userService from "../../utils/userService";
+import userService from "../../utils/userService";
+import SpoonfulLogo from "../../components/SpoonfulLogo/SpoonfulLogo";
 
 type LoginPageProps = {
   handleSignUpOrLogin: () => void;
@@ -24,17 +25,15 @@ export default function LoginPage({ handleSignUpOrLogin }: LoginPageProps) {
 
   async function handleSubmit(e: FormEvent) {
     e.preventDefault();
+    setError("");
 
     try {
-      // We always pass in an OBJECT as the data we want to send to the server
-      // await userService.login(state); // making the http request to the server
+      await userService.login(state);
 
-      navigate("/");
-      handleSignUpOrLogin(); // this comes from app.js as a prop, which it gets the token from localstorage and stores the decoded
-      // token in the app.js state
-    } catch (err) {
-      console.log(err);
-      setError("check terminal and console");
+      handleSignUpOrLogin();
+      navigate("/recipes");
+    } catch (err: unknown) {
+      setError(err instanceof Error ? err.message : "Unable to log in.");
     }
   }
 
@@ -48,34 +47,44 @@ export default function LoginPage({ handleSignUpOrLogin }: LoginPageProps) {
   return (
     <div className="login-page">
       <div className="login-form-container">
-        <h2 className="login-header">Login</h2>
+        <Link className="login-brand" to="/">
+          <SpoonfulLogo />
+        </Link>
+        <div className="login-intro">
+          <h2 className="login-header">Welcome Back!</h2>
+          <p>Log in to your account to continue</p>
+        </div>
         <form autoComplete="off" onSubmit={handleSubmit} className="login-form">
           <div className="login-segment">
+            <label htmlFor="email">Email</label>
             <input
+              id="email"
               type="email"
               name="email"
-              placeholder="email"
+              placeholder="Email"
               value={state.email}
               onChange={handleChange}
               required
               className="login-input"
             />
+            <label htmlFor="password">Password</label>
             <input
+              id="password"
               name="password"
               type="password"
-              placeholder="password"
+              placeholder="Password"
               value={state.password}
               onChange={handleChange}
               required
               className="login-input"
             />
+            <a className="forgot-password" href="#password">Forgot Password?</a>
             <button type="submit" className="login-btn">
               Login
             </button>
+            <Link className="create-account" to="/signup">Create an Account</Link>
           </div>
-          <div className="login-message">
-            New to Us? <Link to="/signup">Sign up</Link>
-          </div>
+          <Link className="explore-recipes" to="/browse-recipes">Explore Recipes without Logging In</Link>
           {error ? <ErrorMessage message={error} /> : null}
         </form>
       </div>
