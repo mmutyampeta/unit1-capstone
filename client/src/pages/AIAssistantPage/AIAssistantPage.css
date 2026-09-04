@@ -1,0 +1,22 @@
+.ai-page { min-height: 100vh; }
+.ai-header { display: flex; align-items: center; justify-content: space-between; min-height: 56px; padding: 0 1.25rem; border-bottom: 1px solid #b0b0b0; }
+.ai-brand { padding: 0; border: 0; background: transparent; cursor: pointer; }
+.ai-dashboard-link, .ai-breadcrumbs a { color: #57852f; font-size: 0.75rem; font-weight: 700; }
+.ai-content { box-sizing: border-box; width: min(92vw, 600px); margin: 0 auto; padding: 2rem 0 3rem; }
+.ai-breadcrumbs { display: flex; gap: 0.35rem; color: #3d3d3d; font-size: 0.75rem; }
+.ai-content h1 { margin: 1rem 0 0.4rem; color: #1b1b1b; font-size: 2rem; font-weight: 600; }
+.ai-description { margin: 0 0 1.4rem; color: #3d3d3d; font-size: 0.9rem; }
+.ai-tool-link { display: inline-block; margin-bottom: 1.4rem; padding: 0.65rem 1rem; border: 1px solid #57852f; border-radius: 4px; background: #ffffff; color: #57852f; font-size: 0.8rem; font-weight: 700; text-decoration: none; }
+.ai-form { display: grid; gap: 0.5rem; }
+.ai-form label, .ai-response h2, .ai-history h2 { color: #3d3d3d; font-size: 0.875rem; font-weight: 700; }
+.ai-form textarea { box-sizing: border-box; width: 100%; padding: 0.75rem; border: 1px solid #707070; border-radius: 4px; background: #ffffff; color: #1b1b1b; font: inherit; resize: vertical; }
+.ai-form textarea:focus { outline: 2px solid #c1e0a6; outline-offset: 1px; border-color: #57852f; }
+.ai-form button { justify-self: start; padding: 0.65rem 1rem; border: 1px solid #57852f; border-radius: 4px; background: #6ba539; color: #ffffff; cursor: pointer; font: inherit; font-size: 0.8rem; font-weight: 700; }
+.ai-form button:disabled { cursor: wait; opacity: 0.7; }
+.ai-error { color: #c62828; font-size: 0.8rem; }
+.ai-thinking { color: #57852f; font-size: 0.8rem; }
+.ai-response, .ai-history { margin-top: 1.5rem; padding: 1rem; border: 1px solid #b0b0b0; border-radius: 4px; background: #ffffff; }
+.ai-response h2, .ai-history h2 { margin: 0 0 0.6rem; }
+.ai-response p, .ai-history p { margin: 0; color: #3d3d3d; font-size: 0.85rem; line-height: 1.5; white-space: pre-wrap; }
+.ai-history article + article { margin-top: 1rem; padding-top: 1rem; border-top: 1px solid #f5f5f5; }
+.ai-history h3 { margin: 0 0 0.4rem; color: #1b1b1b; font-size: 0.85rem; }

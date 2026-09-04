@@ -88,6 +88,11 @@ export default function CreateRecipePage({ onSignOut }: CreateRecipePageProps) {
 				await recipeService.update(recipeId, recipeData);
 			} else {
 				await recipeService.create(recipeData);
+				setIsDirty(false);
+				navigate("/recipes", {
+					state: { successMessage: "Your recipe was successfully created." },
+				});
+				return;
 			}
 			setIsDirty(false);
 			setPendingNavigation(null);

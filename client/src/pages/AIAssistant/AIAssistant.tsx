@@ -1,16 +1,22 @@
 // src/pages/AIAssistant/AIAssistant.jsx
 import { useState } from 'react';
+import type { ChangeEvent, FormEvent } from 'react';
 
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || 'http://localhost:3000';
+
+type HistoryEntry = {
+  prompt: string;
+  answer: string;
+};
 
 function AIAssistant() {
   const [prompt, setPrompt] = useState('');
   const [response, setResponse] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
-  const [history, setHistory] = useState([]);
+  const [history, setHistory] = useState<HistoryEntry[]>([]);
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!prompt.trim() || isLoading) return;
 
@@ -28,7 +34,7 @@ function AIAssistant() {
         body: JSON.stringify({ prompt }),
       });
 
-      if (!res.ok) {
+      if (!res.ok || !res.body) {
         const errorBody = await res.json().catch(() => ({ error: 'Unknown error' }));
         throw new Error(errorBody.error || `Server error: ${res.status}`);
       }
@@ -79,7 +85,7 @@ function AIAssistant() {
       <form onSubmit={handleSubmit}>
         <textarea
           value={prompt}
-          onChange={(e) => setPrompt(e.target.value)}
+          onChange={(e: ChangeEvent<HTMLTextAreaElement>) => setPrompt(e.target.value)}
           placeholder="Ask something..."
           disabled={isLoading}
         />

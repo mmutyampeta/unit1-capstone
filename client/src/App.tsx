@@ -9,6 +9,8 @@ import RecipeDetailPage from "./pages/RecipeDetailPage/RecipeDetailPage";
 import BrowseRecipesPage from "./pages/BrowseRecipesPage/BrowseRecipesPage";
 import SpoonfulLogo from "./components/SpoonfulLogo/SpoonfulLogo";
 import ProfilePage from "./pages/ProfilePage/ProfilePage";
+import AIAssistantPage from "./pages/AIAssistantPage/AIAssistantPage";
+import TextAnalyzerPage from "./pages/TextAnalyzerPage/TextAnalyzerPage";
 import userService from "./utils/userService";
 import type { User } from "./shared.types";
 
@@ -68,6 +70,8 @@ function App() {
       />
       <Route path="/profile" element={user ? <ProfilePage onSignOut={handleSignOut} /> : <Navigate to="/login" replace />} />
       <Route path="/browse-recipes" element={<BrowseRecipesPage onSignOut={user ? handleSignOut : undefined} />} />
+      <Route path="/ai-assistant" element={<AIAssistantPage onSignOut={user ? handleSignOut : undefined} />} />
+      <Route path="/text-analyzer" element={<TextAnalyzerPage onSignOut={user ? handleSignOut : undefined} />} />
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
   );

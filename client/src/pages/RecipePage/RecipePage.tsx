@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import "./RecipePage.css";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { CircleUserRound, Pencil, Trash2 } from "lucide-react";
 import userService from "../../utils/userService";
 import recipeService from "../../utils/recipeService";
@@ -13,9 +13,10 @@ type RecipePageProps = {
 
 export default function RecipePage({ onSignOut }: RecipePageProps) {
 	const user = userService.getUser();
+	const location = useLocation();
 	const [recipes, setRecipes] = useState<Recipe[]>([]);
 	const [error, setError] = useState("");
-	const [successMessage, setSuccessMessage] = useState("");
+	const [successMessage, setSuccessMessage] = useState(() => location.state?.successMessage ?? "");
 	const [recipeToDelete, setRecipeToDelete] = useState<Recipe | null>(null);
 	const navigate = useNavigate();
 

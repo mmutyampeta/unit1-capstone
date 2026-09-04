@@ -1,11 +1,6 @@
-import { Soup } from "lucide-react";
+import logo from "../../assets/Logo.png";
 import "./SpoonfulLogo.css";
 
 export default function SpoonfulLogo() {
-  return (
-    <span className="spoonful-logo">
-      <Soup aria-hidden="true" className="spoonful-logo-icon" strokeWidth={2.8} />
-      <span>spoonful</span>
-    </span>
-  );
+  return <img className="spoonful-logo" src={logo} alt="Spoonful" />;
 }
