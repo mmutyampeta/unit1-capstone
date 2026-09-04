@@ -30,7 +30,7 @@ export default function LoginPage({ handleSignUpOrLogin }: LoginPageProps) {
       await userService.login(state);
 
       handleSignUpOrLogin();
-      navigate("/");
+      navigate("/recipes");
     } catch (err: unknown) {
       setError(err instanceof Error ? err.message : "Unable to log in.");
     }

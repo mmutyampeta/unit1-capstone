@@ -3,6 +3,7 @@ import { useState } from "react";
 import "./App.css";
 import SignUpPage from "./pages/SignupPage/SignupPage";
 import LoginPage from "./pages/LoginPage/LoginPage";
+import RecipePage from "./pages/RecipePage/RecipePage";
 import userService from "./utils/userService";
 import type { User } from "./shared.types";
 
@@ -38,6 +39,10 @@ function App() {
       <Route
         path="/signup"
         element={<SignUpPage handleSignUpOrLogin={handleSignUpOrLogin} />}
+      />
+      <Route
+        path="/recipes"
+        element={user ? <RecipePage /> : <Navigate to="/login" replace />}
       />
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>

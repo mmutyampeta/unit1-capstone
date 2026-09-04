@@ -43,7 +43,7 @@ export default function SignUpPage({ handleSignUpOrLogin }: SignupPageProps) {
         password: state.password,
       });
       handleSignUpOrLogin();
-      navigate("/");
+      navigate("/recipes");
     } catch (err: unknown) {
       setError(err instanceof Error ? err.message : "Unable to create account.");
     }
