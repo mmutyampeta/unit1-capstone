@@ -5,6 +5,7 @@ import SignUpPage from "./pages/SignupPage/SignupPage";
 import LoginPage from "./pages/LoginPage/LoginPage";
 import RecipePage from "./pages/RecipePage/RecipePage";
 import CreateRecipePage from "./pages/CreateRecipePage/CreateRecipePage";
+import RecipeDetailPage from "./pages/RecipeDetailPage/RecipeDetailPage";
 import userService from "./utils/userService";
 import type { User } from "./shared.types";
 
@@ -52,6 +53,10 @@ function App() {
       <Route
         path="/recipes/:recipeId/edit"
         element={user ? <CreateRecipePage /> : <Navigate to="/login" replace />}
+      />
+      <Route
+        path="/recipes/:recipeId"
+        element={user ? <RecipeDetailPage /> : <Navigate to="/login" replace />}
       />
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>

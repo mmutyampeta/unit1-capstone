@@ -95,6 +95,19 @@
 	object-fit: cover;
 }
 
+.recipe-card-link {
+	display: block;
+	color: inherit;
+}
+
+.recipe-card-link:hover h2 {
+	color: #57852f;
+}
+
+.recipe-card-controls {
+	padding-top: 0;
+}
+
 .recipe-card-placeholder {
 	background: #c1e0a6;
 }
@@ -138,7 +151,7 @@
 	display: flex;
 	justify-content: flex-end;
 	gap: 0.9rem;
-	margin-top: 0.8rem;
+	margin-top: 0;
 }
 
 .recipe-card-actions button {

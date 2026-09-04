@@ -53,12 +53,13 @@ export default function RecipePage() {
 					<div className="recipe-list">
 						{recipes.map((recipe) => (
 							<article className="recipe-card" key={recipe._id}>
-								{recipe.image ? (
-									<img className="recipe-card-image" src={recipe.image} alt={recipe.title} />
-								) : (
-									<div className="recipe-card-image recipe-card-placeholder" aria-hidden="true" />
-								)}
-								<div className="recipe-card-content">
+								<Link className="recipe-card-link" to={`/recipes/${recipe._id}`}>
+									{recipe.image ? (
+										<img className="recipe-card-image" src={recipe.image} alt={recipe.title} />
+									) : (
+										<div className="recipe-card-image recipe-card-placeholder" aria-hidden="true" />
+									)}
+									<div className="recipe-card-content">
 									<h2>{recipe.title}</h2>
 									<p className="recipe-card-date">
 										Created on {recipe.createdAt ? new Date(recipe.createdAt).toLocaleDateString() : "today"}
@@ -66,6 +67,9 @@ export default function RecipePage() {
 									<div className="recipe-card-tags">
 										{recipe.tags.map((tag) => <span key={tag}>{tag}</span>)}
 									</div>
+									</div>
+								</Link>
+								<div className="recipe-card-content recipe-card-controls">
 									<div className="recipe-card-actions">
 										<button type="button" aria-label={`Delete ${recipe.title}`} title="Delete recipe" onClick={() => handleDelete(recipe)}>
 											<Trash2 size={18} strokeWidth={2.5} aria-hidden="true" />
