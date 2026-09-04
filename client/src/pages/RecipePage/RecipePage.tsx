@@ -6,7 +6,11 @@ import userService from "../../utils/userService";
 import recipeService from "../../utils/recipeService";
 import type { Recipe } from "../../utils/recipeService";
 
-export default function RecipePage() {
+type RecipePageProps = {
+	onSignOut: () => void;
+};
+
+export default function RecipePage({ onSignOut }: RecipePageProps) {
 	const user = userService.getUser();
 	const [recipes, setRecipes] = useState<Recipe[]>([]);
 	const [error, setError] = useState("");
@@ -32,11 +36,14 @@ export default function RecipePage() {
 	return (
 		<main className="recipe-page">
 			<header className="recipe-header">
-				<Link className="recipe-brand" to="/">
+				<button className="recipe-brand" type="button" onClick={() => { onSignOut(); navigate("/"); }}>
 					<span className="recipe-brand-mark" aria-hidden="true">⌇</span>
 					spoonful
-				</Link>
-				<span className="recipe-user" title={user?.email}>Account</span>
+				</button>
+				<div className="recipe-header-actions">
+					<span className="recipe-user" title={user?.email}>Account</span>
+					<button className="recipe-sign-out" type="button" onClick={() => { onSignOut(); navigate("/"); }}>Sign out</button>
+				</div>
 			</header>
 
 			<section className="recipe-dashboard" aria-labelledby="recipes-heading">
@@ -85,7 +92,7 @@ export default function RecipePage() {
 				)}
 				<div className="recipe-dashboard-actions">
 					<Link className="recipe-create-button" to="/recipes/new">Create Recipe</Link>
-					<Link className="recipe-browse-button" to="/">Browse Recipes</Link>
+					<Link className="recipe-browse-button" to="/browse-recipes">Browse Recipes</Link>
 				</div>
 			</section>
 		</main>

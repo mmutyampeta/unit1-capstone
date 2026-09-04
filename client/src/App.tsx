@@ -6,6 +6,7 @@ import LoginPage from "./pages/LoginPage/LoginPage";
 import RecipePage from "./pages/RecipePage/RecipePage";
 import CreateRecipePage from "./pages/CreateRecipePage/CreateRecipePage";
 import RecipeDetailPage from "./pages/RecipeDetailPage/RecipeDetailPage";
+import BrowseRecipesPage from "./pages/BrowseRecipesPage/BrowseRecipesPage";
 import userService from "./utils/userService";
 import type { User } from "./shared.types";
 
@@ -14,6 +15,11 @@ function App() {
 
   function handleSignUpOrLogin() {
     setUser(userService.getUser());
+  }
+
+  function handleSignOut() {
+    userService.logout();
+    setUser(null);
   }
 
   return (
@@ -44,20 +50,21 @@ function App() {
       />
       <Route
         path="/recipes"
-        element={user ? <RecipePage /> : <Navigate to="/login" replace />}
+        element={user ? <RecipePage onSignOut={handleSignOut} /> : <Navigate to="/login" replace />}
       />
       <Route
         path="/recipes/new"
-        element={user ? <CreateRecipePage /> : <Navigate to="/login" replace />}
+        element={user ? <CreateRecipePage onSignOut={handleSignOut} /> : <Navigate to="/login" replace />}
       />
       <Route
         path="/recipes/:recipeId/edit"
-        element={user ? <CreateRecipePage /> : <Navigate to="/login" replace />}
+        element={user ? <CreateRecipePage onSignOut={handleSignOut} /> : <Navigate to="/login" replace />}
       />
       <Route
         path="/recipes/:recipeId"
-        element={user ? <RecipeDetailPage /> : <Navigate to="/login" replace />}
+        element={<RecipeDetailPage onSignOut={user ? handleSignOut : undefined} />}
       />
+      <Route path="/browse-recipes" element={<BrowseRecipesPage onSignOut={user ? handleSignOut : undefined} />} />
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
   );

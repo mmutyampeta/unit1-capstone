@@ -84,7 +84,7 @@ export default function LoginPage({ handleSignUpOrLogin }: LoginPageProps) {
             </button>
             <Link className="create-account" to="/signup">Create an Account</Link>
           </div>
-          <Link className="explore-recipes" to="/">Explore Recipes without Logging In</Link>
+          <Link className="explore-recipes" to="/browse-recipes">Explore Recipes without Logging In</Link>
           {error ? <ErrorMessage message={error} /> : null}
         </form>
       </div>

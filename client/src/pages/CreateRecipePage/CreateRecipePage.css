@@ -15,7 +15,12 @@
 	display: flex;
 	align-items: center;
 	gap: 0.2rem;
+	padding: 0;
+	border: 0;
+	background: transparent;
 	color: #1b1b1b;
+	cursor: pointer;
+	font: inherit;
 	font-size: 0.875rem;
 	font-weight: 700;
 }
@@ -79,38 +84,6 @@
 	outline: 2px solid #c1e0a6;
 	outline-offset: 1px;
 	border-color: #57852f;
-}
-
-.recipe-image-input {
-	position: absolute;
-	width: 1px;
-	height: 1px;
-	overflow: hidden;
-	clip: rect(0 0 0 0);
-	white-space: nowrap;
-}
-
-.recipe-image-upload {
-	display: grid;
-	min-height: 128px;
-	place-items: center;
-	overflow: hidden;
-	border: 1px dashed #b0b0b0;
-	border-radius: 4px;
-	background: #f5f5f5;
-	color: #707070;
-	cursor: pointer;
-	font-size: 0.7rem;
-}
-
-.recipe-image-upload.has-image {
-	border-style: solid;
-}
-
-.recipe-image-upload img {
-	width: 100%;
-	height: 128px;
-	object-fit: cover;
 }
 
 .recipe-form-actions {

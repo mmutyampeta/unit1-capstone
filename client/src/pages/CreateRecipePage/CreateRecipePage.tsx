@@ -4,13 +4,17 @@ import "./CreateRecipePage.css";
 import recipeService from "../../utils/recipeService";
 import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
 
-export default function CreateRecipePage() {
+type CreateRecipePageProps = {
+	onSignOut: () => void;
+};
+
+export default function CreateRecipePage({ onSignOut }: CreateRecipePageProps) {
 	const navigate = useNavigate();
 	const { recipeId } = useParams();
-	const [imagePreview, setImagePreview] = useState<string | null>(null);
 	const [error, setError] = useState("");
 	const [recipe, setRecipe] = useState<{
 		title: string;
+		image: string;
 		ingredients: string;
 		instructions: string;
 		tags: string;
@@ -21,17 +25,13 @@ export default function CreateRecipePage() {
 		recipeService.getOne(recipeId)
 			.then((existingRecipe) => setRecipe({
 				title: existingRecipe.title,
+				image: existingRecipe.image ?? "",
 				ingredients: existingRecipe.ingredients.map((ingredient) => ingredient.name).join("\n"),
 				instructions: existingRecipe.instructions.map((instruction) => instruction.description).join("\n"),
 				tags: existingRecipe.tags.join(", "),
 			}))
 			.catch(() => setError("Unable to load this recipe."));
 	}, [recipeId]);
-
-	function handleImageChange(event: React.ChangeEvent<HTMLInputElement>) {
-		const image = event.target.files?.[0];
-		setImagePreview(image ? URL.createObjectURL(image) : null);
-	}
 
 	async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
 		event.preventDefault();
@@ -55,6 +55,7 @@ export default function CreateRecipePage() {
 		try {
 			const recipeData = {
 				title: String(formData.get("title")).trim(),
+				image: String(formData.get("image")).trim(),
 				ingredients,
 				instructions,
 				tags,
@@ -73,10 +74,10 @@ export default function CreateRecipePage() {
 	return (
 		<main className="create-recipe-page">
 			<header className="create-recipe-header">
-				<Link className="create-recipe-brand" to="/recipes">
+				<button className="create-recipe-brand" type="button" onClick={() => { onSignOut(); navigate("/"); }}>
 					<span className="create-recipe-brand-mark" aria-hidden="true">⌇</span>
 					spoonful
-				</Link>
+				</button>
 				<Link className="create-recipe-back" to="/recipes">Back to recipes</Link>
 			</header>
 
@@ -107,11 +108,8 @@ export default function CreateRecipePage() {
 					<label htmlFor="recipe-tags">Tags</label>
 					<input id="recipe-tags" name="tags" defaultValue={recipe?.tags} />
 
-					<label htmlFor="recipe-image">Image</label>
-					<label className={`recipe-image-upload${imagePreview ? " has-image" : ""}`} htmlFor="recipe-image">
-						{imagePreview ? <img src={imagePreview} alt="Selected recipe" /> : <span>Choose an image</span>}
-					</label>
-					<input id="recipe-image" className="recipe-image-input" name="image" type="file" accept="image/png,image/jpeg" onChange={handleImageChange} />
+					<label htmlFor="recipe-image">Image URL</label>
+					<input id="recipe-image" name="image" type="url" defaultValue={recipe?.image} />
 
 					<div className="recipe-form-actions">
 						<button className="recipe-save-button" type="submit">Save</button>

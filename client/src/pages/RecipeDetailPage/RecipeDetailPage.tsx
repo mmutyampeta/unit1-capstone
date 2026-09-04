@@ -1,11 +1,16 @@
 import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import recipeService from "../../utils/recipeService";
 import type { Recipe } from "../../utils/recipeService";
 import "./RecipeDetailPage.css";
 
-export default function RecipeDetailPage() {
+type RecipeDetailPageProps = {
+  onSignOut?: () => void;
+};
+
+export default function RecipeDetailPage({ onSignOut }: RecipeDetailPageProps) {
   const { recipeId } = useParams();
+  const navigate = useNavigate();
   const [recipe, setRecipe] = useState<Recipe | null>(null);
   const [error, setError] = useState("");
 
@@ -22,9 +27,9 @@ export default function RecipeDetailPage() {
   return (
     <main className="recipe-detail-page">
       <header className="recipe-detail-header">
-        <Link className="recipe-detail-brand" to="/recipes">
+        {onSignOut ? <button className="recipe-detail-brand" type="button" onClick={() => { onSignOut(); navigate("/"); }}>
           <span aria-hidden="true">⌇</span> spoonful
-        </Link>
+        </button> : <Link className="recipe-detail-brand" to="/"> <span aria-hidden="true">⌇</span> spoonful</Link>}
       </header>
       <article className="recipe-detail-content">
         <nav className="recipe-breadcrumbs" aria-label="Breadcrumb">

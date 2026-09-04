@@ -17,7 +17,12 @@
 	display: flex;
 	align-items: center;
 	gap: 0.2rem;
+	padding: 0;
+	border: 0;
+	background: transparent;
 	color: #1b1b1b;
+	cursor: pointer;
+	font: inherit;
 	font-size: 0.875rem;
 	font-weight: 700;
 }
@@ -32,6 +37,23 @@
 	color: #3d3d3d;
 	font-size: 0.75rem;
 	font-weight: 600;
+}
+
+.recipe-header-actions {
+	display: flex;
+	align-items: center;
+	gap: 0.75rem;
+}
+
+.recipe-sign-out {
+	padding: 0;
+	border: 0;
+	background: transparent;
+	color: #57852f;
+	cursor: pointer;
+	font: inherit;
+	font-size: 0.75rem;
+	font-weight: 700;
 }
 
 .recipe-dashboard {
