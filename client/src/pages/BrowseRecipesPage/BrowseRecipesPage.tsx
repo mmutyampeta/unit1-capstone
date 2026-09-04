@@ -41,6 +41,11 @@ export default function BrowseRecipesPage({ onSignOut }: BrowseRecipesPageProps)
         <h1 id="browse-recipes-heading">Recipe List</h1>
         <label className="browse-search-label" htmlFor="recipe-search">Search recipes</label>
         <input id="recipe-search" className="browse-search" value={search} onChange={(event) => setSearch(event.target.value)} placeholder="Search recipes" />
+        <aside className="browse-ai-callout" aria-label="AI Assistant">
+          <p>Any Questions?</p>
+          <span>Ask the Spoonful AI Assistant for recipe ideas and cooking help.</span>
+          <Link to="/ai-assistant">Open AI Assistant</Link>
+        </aside>
         {error && <p className="browse-recipes-error">{error}</p>}
         {!error && filteredRecipes.length === 0 && (
           <div className="browse-empty-state">

@@ -28,6 +28,8 @@ app.use((req, res, next) => {
   next();
 });
 
+app.use('/api/ai', require('./routes/ai'));
+
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });

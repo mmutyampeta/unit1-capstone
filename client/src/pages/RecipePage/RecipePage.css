@@ -63,12 +63,21 @@
 	font-weight: 700;
 }
 
+
+.recipe-dashboard-layout {
+	display: grid;
+	grid-template-columns: minmax(0, 960px) 220px;
+	gap: 1.5rem;
+	align-items: start;
+	width: min(92vw, 1200px);
+	margin: 0 auto;
+	padding: 1.5rem 0 2rem;
+}
+
 .recipe-dashboard {
 	box-sizing: border-box;
 	align-self: start;
-	width: min(92vw, 960px);
-	margin: 0 auto;
-	padding: 1.5rem 0 2rem;
+	width: 100%;
 }
 
 .recipe-success-message {
@@ -330,10 +339,14 @@
 }
 
 @media (max-width: 600px) {
-	.recipe-dashboard {
-		align-self: start;
+	.recipe-dashboard-layout {
+		grid-template-columns: 1fr;
 		width: min(92vw, 480px);
 		padding: 1.5rem 0 2rem;
+	}
+
+	.recipe-dashboard {
+		width: 100%;
 	}
 
 	.recipe-list {

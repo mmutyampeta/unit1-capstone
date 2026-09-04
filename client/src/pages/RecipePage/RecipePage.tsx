@@ -51,20 +51,21 @@ export default function RecipePage({ onSignOut }: RecipePageProps) {
 				</div>
 			</header>
 
-			<section className="recipe-dashboard" aria-labelledby="recipes-heading">
-				{successMessage && <p className="recipe-success-message" role="status">{successMessage}</p>}
-				<p className="recipe-welcome">
-					Welcome back! Manage your recipes or add a new one.
-				</p>
-				<h1 id="recipes-heading">Your Recipes</h1>
-				{error && <p className="recipe-error">{error}</p>}
-				{recipes.length === 0 ? (
-					<div className="recipe-empty-state">
-						<p>Your recipes will show up here.</p>
-					</div>
-				) : (
-					<div className="recipe-list">
-						{recipes.map((recipe) => (
+			<div className="recipe-dashboard-layout">
+				<section className="recipe-dashboard" aria-labelledby="recipes-heading">
+					{successMessage && <p className="recipe-success-message" role="status">{successMessage}</p>}
+					<p className="recipe-welcome">
+						Welcome back! Manage your recipes or add a new one.
+					</p>
+					<h1 id="recipes-heading">Your Recipes</h1>
+					{error && <p className="recipe-error">{error}</p>}
+					{recipes.length === 0 ? (
+						<div className="recipe-empty-state">
+							<p>Your recipes will show up here.</p>
+						</div>
+					) : (
+						<div className="recipe-list">
+							{recipes.map((recipe) => (
 							<article className="recipe-card" key={recipe._id}>
 								<Link className="recipe-card-link" to={`/recipes/${recipe._id}`}>
 									{recipe.image ? (
@@ -93,14 +94,15 @@ export default function RecipePage({ onSignOut }: RecipePageProps) {
 									</div>
 								</div>
 							</article>
-						))}
+							))}
+						</div>
+					)}
+					<div className="recipe-dashboard-actions">
+						<Link className="recipe-create-button" to="/recipes/new">Create Recipe</Link>
+						<Link className="recipe-browse-button" to="/browse-recipes">Browse Recipes</Link>
 					</div>
-				)}
-				<div className="recipe-dashboard-actions">
-					<Link className="recipe-create-button" to="/recipes/new">Create Recipe</Link>
-					<Link className="recipe-browse-button" to="/browse-recipes">Browse Recipes</Link>
-				</div>
-			</section>
+				</section>
+			</div>
 			{recipeToDelete && (
 				<div className="delete-recipe-backdrop" role="presentation">
 					<section className="delete-recipe-modal" role="dialog" aria-modal="true" aria-labelledby="delete-recipe-heading">
