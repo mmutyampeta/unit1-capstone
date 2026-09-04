@@ -49,6 +49,10 @@ function App() {
         path="/recipes/new"
         element={user ? <CreateRecipePage /> : <Navigate to="/login" replace />}
       />
+      <Route
+        path="/recipes/:recipeId/edit"
+        element={user ? <CreateRecipePage /> : <Navigate to="/login" replace />}
+      />
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
   );
