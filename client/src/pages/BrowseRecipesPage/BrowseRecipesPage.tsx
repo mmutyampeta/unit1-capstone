@@ -4,6 +4,7 @@ import recipeService from "../../utils/recipeService";
 import type { Recipe } from "../../utils/recipeService";
 import userService from "../../utils/userService";
 import "./BrowseRecipesPage.css";
+import SpoonfulLogo from "../../components/SpoonfulLogo/SpoonfulLogo";
 
 type BrowseRecipesPageProps = {
   onSignOut?: () => void;
@@ -31,12 +32,12 @@ export default function BrowseRecipesPage({ onSignOut }: BrowseRecipesPageProps)
     <main className="browse-recipes-page">
       <header className="browse-recipes-header">
         {onSignOut ? <button className="browse-recipes-brand" type="button" onClick={() => { onSignOut(); navigate("/"); }}>
-          <span aria-hidden="true">⌇</span> spoonful
-        </button> : <Link className="browse-recipes-brand" to="/"><span aria-hidden="true">⌇</span> spoonful</Link>}
+          <SpoonfulLogo />
+        </button> : <Link className="browse-recipes-brand" to="/"><SpoonfulLogo /></Link>}
         {user && <Link className="browse-recipes-dashboard-link" to="/recipes">Your recipes</Link>}
       </header>
       <section className="browse-recipes-content" aria-labelledby="browse-recipes-heading">
-        <nav className="browse-breadcrumbs" aria-label="Breadcrumb"><Link to="/">Home</Link><span>&gt;</span><span>Recipe List</span></nav>
+        <nav className="browse-breadcrumbs" aria-label="Breadcrumb"><Link to={user ? "/recipes" : "/"}>Home</Link><span>&gt;</span><span>Recipe List</span></nav>
         <h1 id="browse-recipes-heading">Recipe List</h1>
         <label className="browse-search-label" htmlFor="recipe-search">Search recipes</label>
         <input id="recipe-search" className="browse-search" value={search} onChange={(event) => setSearch(event.target.value)} placeholder="Search recipes" />

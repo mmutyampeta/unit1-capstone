@@ -7,6 +7,8 @@ import RecipePage from "./pages/RecipePage/RecipePage";
 import CreateRecipePage from "./pages/CreateRecipePage/CreateRecipePage";
 import RecipeDetailPage from "./pages/RecipeDetailPage/RecipeDetailPage";
 import BrowseRecipesPage from "./pages/BrowseRecipesPage/BrowseRecipesPage";
+import SpoonfulLogo from "./components/SpoonfulLogo/SpoonfulLogo";
+import ProfilePage from "./pages/ProfilePage/ProfilePage";
 import userService from "./utils/userService";
 import type { User } from "./shared.types";
 
@@ -29,7 +31,7 @@ function App() {
         element={
           <main className="landing-page">
             <header className="landing-header">
-              <Link className="landing-brand" to="/">spoonful</Link>
+              <Link className="landing-brand" to="/"><SpoonfulLogo /></Link>
               <Link className="landing-login" to="/login">Log in</Link>
             </header>
             <section className="landing-content">
@@ -64,6 +66,7 @@ function App() {
         path="/recipes/:recipeId"
         element={<RecipeDetailPage onSignOut={user ? handleSignOut : undefined} />}
       />
+      <Route path="/profile" element={user ? <ProfilePage onSignOut={handleSignOut} /> : <Navigate to="/login" replace />} />
       <Route path="/browse-recipes" element={<BrowseRecipesPage onSignOut={user ? handleSignOut : undefined} />} />
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>

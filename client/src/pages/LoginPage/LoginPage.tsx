@@ -6,6 +6,7 @@ import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
 import { Link, useNavigate } from "react-router-dom";
 
 import userService from "../../utils/userService";
+import SpoonfulLogo from "../../components/SpoonfulLogo/SpoonfulLogo";
 
 type LoginPageProps = {
   handleSignUpOrLogin: () => void;
@@ -47,8 +48,7 @@ export default function LoginPage({ handleSignUpOrLogin }: LoginPageProps) {
     <div className="login-page">
       <div className="login-form-container">
         <Link className="login-brand" to="/">
-          <span className="login-brand-mark" aria-hidden="true">⌇</span>
-          spoonful
+          <SpoonfulLogo />
         </Link>
         <div className="login-intro">
           <h2 className="login-header">Welcome Back!</h2>

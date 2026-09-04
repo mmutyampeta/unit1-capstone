@@ -3,6 +3,7 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import recipeService from "../../utils/recipeService";
 import type { Recipe } from "../../utils/recipeService";
 import "./RecipeDetailPage.css";
+import SpoonfulLogo from "../../components/SpoonfulLogo/SpoonfulLogo";
 
 type RecipeDetailPageProps = {
   onSignOut?: () => void;
@@ -11,6 +12,8 @@ type RecipeDetailPageProps = {
 export default function RecipeDetailPage({ onSignOut }: RecipeDetailPageProps) {
   const { recipeId } = useParams();
   const navigate = useNavigate();
+  const homePath = onSignOut ? "/recipes" : "/";
+  const recipeListPath = onSignOut ? "/recipes" : "/browse-recipes";
   const [recipe, setRecipe] = useState<Recipe | null>(null);
   const [error, setError] = useState("");
 
@@ -28,12 +31,12 @@ export default function RecipeDetailPage({ onSignOut }: RecipeDetailPageProps) {
     <main className="recipe-detail-page">
       <header className="recipe-detail-header">
         {onSignOut ? <button className="recipe-detail-brand" type="button" onClick={() => { onSignOut(); navigate("/"); }}>
-          <span aria-hidden="true">⌇</span> spoonful
-        </button> : <Link className="recipe-detail-brand" to="/"> <span aria-hidden="true">⌇</span> spoonful</Link>}
+          <SpoonfulLogo />
+        </button> : <Link className="recipe-detail-brand" to="/"><SpoonfulLogo /></Link>}
       </header>
       <article className="recipe-detail-content">
         <nav className="recipe-breadcrumbs" aria-label="Breadcrumb">
-          <Link to="/">Home</Link><span>&gt;</span><Link to="/recipes">Recipe List</Link><span>&gt;</span><span>{recipe.title}</span>
+          <Link to={homePath}>Home</Link><span>&gt;</span><Link to={recipeListPath}>Recipe List</Link><span>&gt;</span><span>{recipe.title}</span>
         </nav>
         {recipe.image ? <img className="recipe-detail-image" src={recipe.image} alt={recipe.title} /> : <div className="recipe-detail-image recipe-detail-placeholder" aria-hidden="true" />}
         <h1>{recipe.title}</h1>

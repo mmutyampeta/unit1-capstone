@@ -1,0 +1,15 @@
+.spoonful-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  color: #1b1b1b;
+  font-family: "Open Sans", sans-serif;
+  font-size: 1em;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.spoonful-logo-icon {
+  width: 1.35em;
+  height: 1.35em;
+}

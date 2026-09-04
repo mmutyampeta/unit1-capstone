@@ -43,9 +43,32 @@ async function login(creds: LoginCredentials): Promise<void> {
   }
 }
 
+async function updateProfile(user: SignupData): Promise<void> {
+  try {
+    const res = await axios.put(BASE_URL + "me", user, {
+      headers: { Authorization: `Bearer ${tokenService.getToken()}` },
+    });
+    tokenService.setToken(res.data.token);
+  } catch {
+    throw new Error("Unable to update your profile.");
+  }
+}
+
+async function deleteProfile(): Promise<void> {
+  try {
+    await axios.delete(BASE_URL + "me", {
+      headers: { Authorization: `Bearer ${tokenService.getToken()}` },
+    });
+  } catch {
+    throw new Error("Unable to delete your account.");
+  }
+}
+
 export default {
   signup,
   getUser,
   logout,
   login,
+  updateProfile,
+  deleteProfile,
 };

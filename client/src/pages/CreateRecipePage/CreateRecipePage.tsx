@@ -1,17 +1,26 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import "./CreateRecipePage.css";
 import recipeService from "../../utils/recipeService";
 import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
+import SpoonfulLogo from "../../components/SpoonfulLogo/SpoonfulLogo";
 
 type CreateRecipePageProps = {
 	onSignOut: () => void;
 };
 
+type PendingNavigation = {
+	path: string;
+	signOut: boolean;
+};
+
 export default function CreateRecipePage({ onSignOut }: CreateRecipePageProps) {
 	const navigate = useNavigate();
 	const { recipeId } = useParams();
+	const formRef = useRef<HTMLFormElement>(null);
 	const [error, setError] = useState("");
+	const [isDirty, setIsDirty] = useState(false);
+	const [pendingNavigation, setPendingNavigation] = useState<PendingNavigation | null>(null);
 	const [recipe, setRecipe] = useState<{
 		title: string;
 		image: string;
@@ -33,6 +42,20 @@ export default function CreateRecipePage({ onSignOut }: CreateRecipePageProps) {
 			.catch(() => setError("Unable to load this recipe."));
 	}, [recipeId]);
 
+	function completeNavigation({ path, signOut }: PendingNavigation) {
+		if (signOut) onSignOut();
+		navigate(path);
+	}
+
+	function requestNavigation(path: string, signOut = false) {
+		const navigation = { path, signOut };
+		if (recipeId && isDirty) {
+			setPendingNavigation(navigation);
+			return;
+		}
+		completeNavigation(navigation);
+	}
+
 	async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
 		event.preventDefault();
 		setError("");
@@ -53,6 +76,7 @@ export default function CreateRecipePage({ onSignOut }: CreateRecipePageProps) {
 			.filter(Boolean);
 
 		try {
+			const destination = pendingNavigation ?? { path: "/recipes", signOut: false };
 			const recipeData = {
 				title: String(formData.get("title")).trim(),
 				image: String(formData.get("image")).trim(),
@@ -65,7 +89,9 @@ export default function CreateRecipePage({ onSignOut }: CreateRecipePageProps) {
 			} else {
 				await recipeService.create(recipeData);
 			}
-			navigate("/recipes");
+			setIsDirty(false);
+			setPendingNavigation(null);
+			completeNavigation(destination);
 		} catch {
 			setError("Unable to save your recipe. Please try again.");
 		}
@@ -74,16 +100,15 @@ export default function CreateRecipePage({ onSignOut }: CreateRecipePageProps) {
 	return (
 		<main className="create-recipe-page">
 			<header className="create-recipe-header">
-				<button className="create-recipe-brand" type="button" onClick={() => { onSignOut(); navigate("/"); }}>
-					<span className="create-recipe-brand-mark" aria-hidden="true">⌇</span>
-					spoonful
+				<button className="create-recipe-brand" type="button" onClick={() => requestNavigation("/", true)}>
+					<SpoonfulLogo />
 				</button>
-				<Link className="create-recipe-back" to="/recipes">Back to recipes</Link>
+				<Link className="create-recipe-back" to="/recipes" onClick={(event) => { event.preventDefault(); requestNavigation("/recipes"); }}>Back to recipes</Link>
 			</header>
 
 			<section className="create-recipe-content" aria-labelledby="create-recipe-heading">
 				<h1 id="create-recipe-heading">{recipeId ? "Edit Recipe" : "Create Recipe"}</h1>
-				<form key={recipeId ? recipe?.title ?? "loading" : "new"} className="recipe-form" onSubmit={handleSubmit}>
+				<form key={recipeId ? recipe?.title ?? "loading" : "new"} ref={formRef} className="recipe-form" onChange={() => { if (recipeId) setIsDirty(true); }} onSubmit={handleSubmit}>
 					<label htmlFor="recipe-title">Title</label>
 					<input id="recipe-title" name="title" defaultValue={recipe?.title} required />
 
@@ -113,11 +138,22 @@ export default function CreateRecipePage({ onSignOut }: CreateRecipePageProps) {
 
 					<div className="recipe-form-actions">
 						<button className="recipe-save-button" type="submit">Save</button>
-						<Link className="recipe-cancel-button" to="/recipes">Cancel</Link>
+						<Link className="recipe-cancel-button" to="/recipes" onClick={(event) => { event.preventDefault(); requestNavigation("/recipes"); }}>Cancel</Link>
 					</div>
 					{error && <ErrorMessage message={error} />}
 				</form>
 			</section>
+			{pendingNavigation && (
+				<div className="unsaved-changes-backdrop" role="presentation">
+					<section className="unsaved-changes-modal" role="dialog" aria-modal="true" aria-labelledby="unsaved-changes-heading">
+						<h2 id="unsaved-changes-heading">You have unsaved changes.</h2>
+						<p>Do you want to proceed without saving your changes?</p>
+						<button className="unsaved-changes-save" type="button" onClick={() => formRef.current?.requestSubmit()}>Save Changes</button>
+						<button className="unsaved-changes-discard" type="button" onClick={() => { completeNavigation(pendingNavigation); setPendingNavigation(null); }}>Continue with Saving</button>
+						<button className="unsaved-changes-cancel" type="button" onClick={() => setPendingNavigation(null)}>Cancel</button>
+					</section>
+				</div>
+			)}
 		</main>
 	);
 }

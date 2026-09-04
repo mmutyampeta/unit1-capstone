@@ -4,6 +4,7 @@ import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
 import "./SignupPage.css";
 import { Link, useNavigate } from "react-router-dom";
 import userService from "../../utils/userService";
+import SpoonfulLogo from "../../components/SpoonfulLogo/SpoonfulLogo";
 
 type SignupPageProps = {
   handleSignUpOrLogin: () => void;
@@ -53,8 +54,7 @@ export default function SignUpPage({ handleSignUpOrLogin }: SignupPageProps) {
     <div className="signup-page">
       <div className="signup-form-container">
         <Link className="signup-brand" to="/">
-          <span className="signup-brand-mark" aria-hidden="true">⌇</span>
-          spoonful
+          <SpoonfulLogo />
         </Link>
         <h2 className="signup-header">Create an Account</h2>
         <form

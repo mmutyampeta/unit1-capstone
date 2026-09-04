@@ -34,9 +34,16 @@
 }
 
 .recipe-user {
+	display: grid;
+	width: 24px;
+	height: 24px;
+	place-items: center;
 	color: #3d3d3d;
-	font-size: 0.75rem;
-	font-weight: 600;
+	border-radius: 4px;
+}
+
+.recipe-user:hover {
+	background: #c1e0a6;
 }
 
 .recipe-header-actions {
@@ -58,10 +65,25 @@
 
 .recipe-dashboard {
 	box-sizing: border-box;
-	align-self: center;
+	align-self: start;
 	width: min(92vw, 960px);
 	margin: 0 auto;
-	padding: 2rem 0;
+	padding: 1.5rem 0 2rem;
+}
+
+.recipe-success-message {
+	display: grid;
+	box-sizing: border-box;
+	width: min(100%, 286px);
+	min-height: 34px;
+	margin: 0 0 1.25rem;
+	place-items: center;
+	border-radius: 8px;
+	background: #c1e0a6;
+	color: #1b1b1b;
+	font-size: 0.8rem;
+	font-weight: 700;
+	text-align: center;
 }
 
 .recipe-welcome {
@@ -201,6 +223,70 @@
 .recipe-error {
 	color: #c62828;
 	font-size: 0.875rem;
+}
+
+.delete-recipe-backdrop {
+	position: fixed;
+	inset: 0;
+	z-index: 10;
+	display: grid;
+	place-items: center;
+	background: rgb(27 27 27 / 26%);
+	padding: 1rem;
+}
+
+.delete-recipe-modal {
+	box-sizing: border-box;
+	width: min(100%, 270px);
+	padding: 1.8rem 0.75rem 0.75rem;
+	border: 2px solid #707070;
+	border-radius: 8px;
+	background: #fbeabf;
+	box-shadow: 0 8px 22px rgb(27 27 27 / 28%);
+	text-align: center;
+}
+
+.delete-recipe-modal h2 {
+	margin: 0;
+	color: #1b1b1b;
+	font-size: 1rem;
+	font-weight: 700;
+}
+
+.delete-recipe-modal p {
+	margin: 1rem 0 1.2rem;
+	color: #1b1b1b;
+	font-size: 0.9rem;
+	line-height: 1.35;
+}
+
+.delete-recipe-confirm,
+.delete-recipe-cancel {
+	box-sizing: border-box;
+	width: 100%;
+	padding: 0.75rem 0.5rem;
+	border-radius: 8px;
+	cursor: pointer;
+	font: inherit;
+	font-size: 0.9rem;
+	font-weight: 700;
+}
+
+.delete-recipe-confirm {
+	border: 1px solid #57852f;
+	background: #6ba539;
+	color: #ffffff;
+}
+
+.delete-recipe-confirm:hover {
+	background: #57852f;
+}
+
+.delete-recipe-cancel {
+	margin-top: 0.5rem;
+	border: 1px solid #6ba539;
+	background: transparent;
+	color: #6ba539;
 }
 
 .recipe-dashboard-actions {

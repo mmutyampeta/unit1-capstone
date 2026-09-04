@@ -120,6 +120,74 @@
 	color: #57852f;
 }
 
+.unsaved-changes-backdrop {
+	position: fixed;
+	inset: 0;
+	z-index: 10;
+	display: grid;
+	place-items: center;
+	background: rgb(27 27 27 / 26%);
+	padding: 1rem;
+}
+
+.unsaved-changes-modal {
+	box-sizing: border-box;
+	width: min(100%, 212px);
+	padding: 1.6rem 0.55rem 0.75rem;
+	border: 2px solid #707070;
+	border-radius: 8px;
+	background: #fbeabf;
+	box-shadow: 0 8px 22px rgb(27 27 27 / 28%);
+	text-align: center;
+}
+
+.unsaved-changes-modal h2 {
+	margin: 0;
+	color: #1b1b1b;
+	font-size: 0.875rem;
+	font-weight: 700;
+}
+
+.unsaved-changes-modal p {
+	margin: 1rem 0 1.1rem;
+	color: #1b1b1b;
+	font-size: 0.75rem;
+	line-height: 1.35;
+}
+
+.unsaved-changes-save,
+.unsaved-changes-discard,
+.unsaved-changes-cancel {
+	box-sizing: border-box;
+	width: 100%;
+	padding: 0.6rem 0.4rem;
+	border-radius: 8px;
+	cursor: pointer;
+	font: inherit;
+	font-size: 0.75rem;
+	font-weight: 700;
+}
+
+.unsaved-changes-save {
+	border: 1px solid #57852f;
+	background: #6ba539;
+	color: #ffffff;
+}
+
+.unsaved-changes-discard {
+	margin-top: 0.4rem;
+	border: 1px solid #6ba539;
+	background: transparent;
+	color: #6ba539;
+}
+
+.unsaved-changes-cancel {
+	margin-top: 0.35rem;
+	border: 0;
+	background: transparent;
+	color: #6ba539;
+}
+
 @media (max-width: 560px) {
 	.create-recipe-content {
 		padding: 1.25rem 1rem 3rem;
