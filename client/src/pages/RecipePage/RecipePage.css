@@ -68,6 +68,8 @@
 }
 
 .recipe-create-button {
+	display: block;
+	box-sizing: border-box;
 	width: 100%;
 	margin-top: 1.5rem;
 	padding: 0.8rem 1rem;
@@ -79,6 +81,7 @@
 	font: inherit;
 	font-size: 0.875rem;
 	font-weight: 700;
+	text-align: center;
 }
 
 .recipe-create-button:hover {

@@ -23,9 +23,7 @@ export default function RecipePage() {
 				<div className="recipe-empty-state">
 					<p>Your recipes will show up here.</p>
 				</div>
-				<button className="recipe-create-button" type="button">
-					Create Recipe
-				</button>
+				<Link className="recipe-create-button" to="/recipes/new">Create Recipe</Link>
 			</section>
 		</main>
 	);
